@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp">
+
+    <!-- Оборачиваем все элементы в вертикальный LinearLayout
+         и центрируем его по экрану -->
+    <LinearLayout
+        android:id="@+id/container"
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Вывод пароля -->
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:hint="Пароль появится здесь"
+            android:focusable="false"
+            android:inputType="textPassword"
+            android:textSize="18sp"
+            android:padding="8dp"/>
+
+        <!-- Селектор длины -->
+        <TextView
+            android:id="@+id/tvLengthLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Длина: 12"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp"/>
+
+        <SeekBar
+            android:id="@+id/seekLength"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="32"
+            android:min="4"
+            android:progress="12"/>
+
+        <!-- Чекбоксы наборов символов -->
+        <CheckBox
+            android:id="@+id/cbUpper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="A-Z (заглавные)"/>
+
+        <CheckBox
+            android:id="@+id/cbLower"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="a-z (строчные)"/>
+
+        <CheckBox
+            android:id="@+id/cbDigits"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="0-9 (цифры)"/>
+
+        <CheckBox
+            android:id="@+id/cbSymbols"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="!@#… (спецсимволы)"/>
+
+        <!-- Индикатор прочности -->
+        <TextView
+            android:id="@+id/tvStrength"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Сила: —"
+            android:textSize="16sp"
+            android:layout_marginTop="12dp"/>
+
+        <ProgressBar
+            android:id="@+id/progressStrength"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:max="100"
+            android:progress="0"
+            android:layout_marginTop="4dp"/>
+
+        <!-- Кнопки -->
+        <Button
+            android:id="@+id/btnGenerate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Сгенерировать"
+            android:layout_marginTop="16dp"/>
+
+        <Button
+            android:id="@+id/btnCopy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Копировать"
+            android:layout_marginTop="8dp"/>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
