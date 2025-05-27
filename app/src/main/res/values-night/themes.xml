@@ -1,7 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.PasswordGenerator" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+
+    <!-- Основная тема приложения на Material 3 -->
+    <style name="Theme.PasswordGenerator" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Ниже можно переопределить цвета, если нужны свои -->
+        <!--
+        <item name="colorPrimary">@color/md_theme_light_primary</item>
+        <item name="colorSecondary">@color/md_theme_light_secondary</item>
+        -->
+        <!-- Цвет статус-бара под цвет темы -->
+        <item name="android:statusBarColor">?attr/colorPrimary</item>
     </style>
+
 </resources>
