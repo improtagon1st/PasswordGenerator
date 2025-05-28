@@ -34,7 +34,7 @@ android {
 dependencies {
 
     implementation(libs.appcompat)
-    implementation(libs.material)         // уже есть Material — можно оставить
+    implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
 

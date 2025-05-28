@@ -1,4 +1,4 @@
-package com.example.passwordgenerator;        // ← замени, если у тебя другой package
+package com.example.passwordgenerator;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -21,21 +21,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Главная (и единственная) активити генератора паролей.
- * Использует Material 3-виджеты и библиотеку zxcvbn для оценки стойкости.
- */
-public class MainActivity extends AppCompatActivity {
 
-    /* ---------- UI ---------- */
+public class MainActivity extends AppCompatActivity {
 
     private TextInputEditText etPassword;
     private Slider sliderLength;
     private MaterialCheckBox cbUpper, cbLower, cbDigits, cbSymbols;
     private LinearProgressIndicator progressStrength;
     private MaterialButton btnGenerate, btnCopy;
-
-    /* ---------- Данные ---------- */
 
     private static final String UPPER   = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final String LOWER   = "abcdefghijklmnopqrstuvwxyz";
@@ -45,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
     private final SecureRandom random = new SecureRandom();
     private final Zxcvbn zxcvbn       = new Zxcvbn();
 
-    /* ---------- Жизненный цикл ---------- */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,15 +64,13 @@ public class MainActivity extends AppCompatActivity {
         btnGenerate.setOnClickListener(v -> generateAndShow());
         btnCopy.setOnClickListener(v -> copyToClipboard());
 
-        // Хотите выводить текущую длину в Toast при изменении слайдера? Раскомментируйте:
-        /*
+
         sliderLength.addOnChangeListener((slider, value, fromUser) -> {
             if (fromUser) Toast.makeText(this, "Длина: " + (int) value, Toast.LENGTH_SHORT).show();
         });
-        */
     }
 
-    /* ---------- Генерация и копирование ---------- */
+
 
     private void generateAndShow() {
         int length = Math.round(sliderLength.getValue());
@@ -113,27 +103,20 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, "Пароль скопирован в буфер", Toast.LENGTH_SHORT).show();
     }
 
-    /* ---------- Логика генерации ---------- */
 
-    /** Строит пароль нужной длины, гарантируя наличие символов всех выбранных наборов. */
     private String buildPassword(int length, List<String> sets) {
         List<Character> chars = new ArrayList<>();
 
-        // 1) минимум по одному символу из каждого набора
         for (String s : sets) chars.add(randomChar(s));
 
-        // 2) объединяем выборку
         StringBuilder poolBuilder = new StringBuilder();
         for (String s : sets) poolBuilder.append(s);
         String pool = poolBuilder.toString();
 
-        // 3) заполняем оставшееся
         while (chars.size() < length) chars.add(randomChar(pool));
 
-        // 4) перемешиваем
         Collections.shuffle(chars, random);
 
-        // 5) формируем строку
         StringBuilder result = new StringBuilder();
         for (char c : chars) result.append(c);
         return result.toString();
@@ -143,14 +126,11 @@ public class MainActivity extends AppCompatActivity {
         return src.charAt(random.nextInt(src.length()));
     }
 
-    /* ---------- Оценка стойкости zxcvbn ---------- */
-
     private void updateStrengthIndicator(String password) {
-        Strength s = zxcvbn.measure(password);  // score 0-4
-        int score = s.getScore();               // чем больше, тем сильнее
-        int progress = (score + 1) * 20;        // 20–100 %
+        Strength s = zxcvbn.measure(password);
+        int score = s.getScore();
+        int progress = (score + 1) * 20;
 
-        // Анимированно обновляем линейный прогресс
         progressStrength.setProgressCompat(progress, true);
 
         String[] labels = {"Очень слабый", "Слабый", "Средний", "Хороший", "Отличный"};
